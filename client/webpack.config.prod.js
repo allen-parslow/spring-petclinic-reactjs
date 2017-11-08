@@ -23,7 +23,6 @@ module.exports = {
       'process.env': {
         'NODE_ENV': JSON.stringify('production'),
       },
-       __API_SERVER_URL__: JSON.stringify('http://localhost:8080')
     })
   ],
   resolve: {

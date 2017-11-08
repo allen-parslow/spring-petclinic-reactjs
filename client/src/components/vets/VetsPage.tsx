@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { IRouter, Link } from 'react-router';
-import { url } from '../../util';
 
 import { IVet } from '../../types';
 
@@ -17,9 +16,7 @@ export default class VetsPage extends React.Component<void, IVetsPageState> {
   }
 
   componentDidMount() {
-    const requestUrl = url('api/vets');
-
-    fetch(requestUrl)
+    fetch('/api-vets/vets')
       .then(response => response.json())
       .then(vets => { console.log('vets', vets); this.setState({ vets }); });
   }
@@ -46,7 +43,7 @@ export default class VetsPage extends React.Component<void, IVetsPageState> {
             {vets.map(vet => (
               <tr key={vet.id}>
                 <td>{vet.firstName} {vet.lastName}</td>
-                <td>{vet.specialties.length > 0 ? vet.specialties.map(specialty => specialty.name).join(', ') : 'none'}</td>
+                <td>{vet.specialties.length > 0 ? vet.specialties.map(specialty => specialty).join(', ') : 'none'}</td>
               </tr>
             ))}
           </tbody>

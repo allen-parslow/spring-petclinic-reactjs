@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { IRouter, Link } from 'react-router';
-import { url, submitForm } from '../../util';
+import { submitForm } from '../../util';
 
 import Input from '../form/Input';
 import DateInput from '../form/DateInput';
@@ -77,7 +77,7 @@ export default class PetEditor extends React.Component<IPetEditorProps, IPetEdit
     return (
       <span>
         <h2>{formLabel}</h2>
-        <form className='form-horizontal' method='POST' action={url('/api/owner')}>
+        <form className='form-horizontal' method='POST' action={'/api/owner'}>
           <div className='form-group has-feedback'>
             <div className='form-group'>
               <label className='col-sm-2 control-label'>Owner</label>

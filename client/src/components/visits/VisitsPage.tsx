@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { IOwner, IPet, IPetType, IVisit, IError, IRouterContext } from '../../types';
 
-import { url, submitForm } from '../../util';
+import { submitForm } from '../../util';
 import { NotEmpty } from '../form/Constraints';
 
 import DateInput from '../form/DateInput';
@@ -43,7 +43,7 @@ export default class VisitsPage extends React.Component<IVisitsPageProps, IVisit
     const { params } = this.props;
 
     if (params && params.ownerId) {
-      fetch(url(`/api/owner/${params.ownerId}`))
+      fetch(`/api/owner/${params.ownerId}`)
         .then(response => response.json())
         .then(owner => this.setState(
           {
@@ -102,7 +102,7 @@ export default class VisitsPage extends React.Component<IVisitsPageProps, IVisit
         <b>Pet</b>
         <PetDetails owner={owner} pet={pet} />
 
-        <form className='form-horizontal' method='POST' action={url('/api/owner')}>
+        <form className='form-horizontal' method='POST' action={'/api/owner'}>
           <div className='form-group has-feedback'>
             <DateInput object={visit} error={error} label='Date' name='date' onChange={this.onInputChange} />
             <Input object={visit} error={error} constraint={NotEmpty} label='Description' name='description' onChange={this.onInputChange} />

@@ -2,8 +2,6 @@ import * as React from 'react';
 
 import { IOwner, IEditablePet, ISelectOption } from '../../types';
 
-import { url } from '../../util';
-
 import LoadingPanel from './LoadingPanel';
 import PetEditor from './PetEditor';
 
