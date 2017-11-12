@@ -36,7 +36,7 @@ public class PetResourceTests {
 
 		given(clinicService.findPetById(2)).willReturn(pet);
 
-		mvc.perform(get("/api/owners/2/pets/2") //
+		mvc.perform(get("/api-owners/owners/2/pets/2") //
 				.accept(MediaType.APPLICATION_JSON)) //
 				.andExpect(status().isOk()) //
 				.andExpect(content().contentType("application/json;charset=UTF-8")) //

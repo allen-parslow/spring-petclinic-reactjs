@@ -43,12 +43,12 @@ export default class VisitsPage extends React.Component<IVisitsPageProps, IVisit
     const { params } = this.props;
 
     if (params && params.ownerId) {
-      fetch(`/api/owner/${params.ownerId}`)
+      fetch(`/api-owners/owners/${params.ownerId}`)
         .then(response => response.json())
         .then(owner => this.setState(
           {
             owner: owner,
-            visit: { id: null, isNew: true, date: null, description: '' }
+            visit: { id: null, date: null, description: '' }
           })
         );
     }
@@ -65,7 +65,7 @@ export default class VisitsPage extends React.Component<IVisitsPageProps, IVisit
       description: visit.description
     };
 
-    const url = '/api/owners/' + owner.id + '/pets/' + petId + '/visits';
+    const url = '/api-owners/owners/' + owner.id + '/pets/' + petId + '/visits';
     submitForm('POST', url, request, (status, response) => {
       if (status === 204) {
         this.context.router.push({
@@ -102,7 +102,7 @@ export default class VisitsPage extends React.Component<IVisitsPageProps, IVisit
         <b>Pet</b>
         <PetDetails owner={owner} pet={pet} />
 
-        <form className='form-horizontal' method='POST' action={'/api/owner'}>
+        <form className='form-horizontal' method='POST' action={'/api-owners/owners/'}>
           <div className='form-group has-feedback'>
             <DateInput object={visit} error={error} label='Date' name='date' onChange={this.onInputChange} />
             <Input object={visit} error={error} constraint={NotEmpty} label='Description' name='description' onChange={this.onInputChange} />

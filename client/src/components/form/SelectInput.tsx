@@ -23,7 +23,7 @@ export default ({object, error, name, label, options, onChange}: { object: any, 
 
       <div className='col-sm-10'>
         <select size={5} className='form-control' name={name} onChange={handleOnChange} value={selectedValue}>
-          {options.map(option => <option key={option.value} value={option.value as string}>{option.name}</option>)}
+          {options ? options.map(option => <option key={option.value} value={option.value as string}>{option.name}</option>) : null}
         </select>
         <FieldFeedbackPanel valid={valid} fieldError={fieldError} />
       </div>

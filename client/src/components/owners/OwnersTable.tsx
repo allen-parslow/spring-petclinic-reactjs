@@ -12,7 +12,7 @@ const renderRow = (owner: IOwner) => (
     <td className='hidden-sm hidden-xs'>{owner.address}</td>
     <td>{owner.city}</td>
     <td>{owner.telephone}</td>
-    <td className='hidden-xs'>{owner.pets.map(pet => pet.name).join(', ')}</td>
+    <td className='hidden-xs'>{owner.pets ? owner.pets.map(pet => pet.name).join(', ') : null}</td>
   </tr>
 );
 

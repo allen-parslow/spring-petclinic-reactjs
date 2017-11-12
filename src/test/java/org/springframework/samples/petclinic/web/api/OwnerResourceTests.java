@@ -41,7 +41,7 @@ public class OwnerResourceTests {
 	public void shouldGetOwnerById() throws Exception {
 		given(clinicService.findOwnerById(1)).willReturn(setupOwners().get(1));
 
-		mvc.perform(get("/api/owner/1") //
+		mvc.perform(get("/api-owners/owners/1") //
 				.accept(MediaType.APPLICATION_JSON)) //
 				.andExpect(status().isOk()) //
 				.andExpect(content().contentType("application/json;charset=UTF-8")) //
@@ -55,7 +55,7 @@ public class OwnerResourceTests {
 		final List<Owner> owners = setupOwners();
 		owners.remove(1);
 		given(clinicService.findOwnerByLastName("mueller")).willReturn(owners);
-		mvc.perform(get("/api/owner/list/?lastName=mueller") //
+		mvc.perform(get("/api-owners/owners/list/?q=mueller") //
 				.accept(MediaType.APPLICATION_JSON)) //
 		.andExpect(status().isOk())
 		.andExpect(content().contentType("application/json;charset=UTF-8")) //
@@ -84,7 +84,7 @@ public class OwnerResourceTests {
 		String newOwnerAsJsonString = 
 				mapper.writeValueAsString(newOwner);
 		
-		mvc.perform(post("/api/owner") //
+		mvc.perform(post("/api-owners/owners/") //
 				.content(ownerAsJsonString).accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)) //
 				.andExpect(status().isCreated())
 				.andExpect(content().json(newOwnerAsJsonString))
@@ -101,7 +101,7 @@ public class OwnerResourceTests {
 		ObjectMapper mapper = new ObjectMapper();
 		String ownerAsJsonString = mapper.writeValueAsString(newOwner);
 		
-		mvc.perform(post("/api/owner") //
+		mvc.perform(post("/api-owners/owners/") //
 				.content(ownerAsJsonString).accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)) //
 				.andExpect(status().isUnprocessableEntity())
 				.andExpect(content().contentType("application/json")) //

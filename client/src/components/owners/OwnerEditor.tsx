@@ -41,8 +41,8 @@ export default class OwnerEditor extends React.Component<IOwnerEditorProps, IOwn
 
     const { owner } = this.state;
 
-    const url = owner.isNew ? '/api/owner' : '/api/owner/' + owner.id;
-    submitForm(owner.isNew ? 'POST' : 'PUT', url, owner, (status, response) => {
+    const url = owner.id ? '/api-owners/owners' : '/api-owners/owners/' + owner.id;
+    submitForm(owner.id ? 'POST' : 'PUT', url, owner, (status, response) => {
       if (status === 200 || status === 201) {
         const newOwner = response as IOwner;
         this.context.router.push({
@@ -70,7 +70,7 @@ export default class OwnerEditor extends React.Component<IOwnerEditorProps, IOwn
     return (
       <span>
         <h2>New Owner</h2>
-        <form className='form-horizontal' method='POST' action={'/api/owner'}>
+        <form className='form-horizontal' method='POST' action={'/api-owners/owners'}>
           <div className='form-group has-feedback'>
             <Input object={owner} error={error} constraint={NotEmpty} label='First Name' name='firstName' onChange={this.onInputChange} />
             <Input object={owner} error={error} constraint={NotEmpty} label='Last Name' name='lastName' onChange={this.onInputChange} />
@@ -80,7 +80,7 @@ export default class OwnerEditor extends React.Component<IOwnerEditorProps, IOwn
           </div>
           <div className='form-group'>
             <div className='col-sm-offset-2 col-sm-10'>
-              <button className='btn btn-default' type='submit' onClick={this.onSubmit}>{owner.isNew ? 'Add Owner' : 'Update Owner'}</button>
+              <button className='btn btn-default' type='submit' onClick={this.onSubmit}>{owner.id ? 'Add Owner' : 'Update Owner'}</button>
             </div>
           </div>
         </form>

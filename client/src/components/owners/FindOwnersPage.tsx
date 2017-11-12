@@ -85,7 +85,7 @@ export default class FindOwnersPage extends React.Component<IFindOwnersPageProps
   fetchData(filter: string) {
     const query = filter ? encodeURIComponent(filter) : '';
 
-    fetch('api/owner/list?lastName=' + query)
+    fetch('/api-owners/owners?q=' + query)
       .then(response => response.json())
       .then(owners => { this.setState({ owners }); });
   }

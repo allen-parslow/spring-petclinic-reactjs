@@ -26,7 +26,7 @@ export default class OwnersPage extends React.Component<IOwnersPageProps, IOwner
     const { params } = this.props;
 
     if (params && params.ownerId) {
-      fetch(`/api/owner/${params.ownerId}`)
+      fetch(`/api-owners/owners/${params.ownerId}`)
         .then(response => response.json())
         .then(owner => this.setState({ owner }));
     }

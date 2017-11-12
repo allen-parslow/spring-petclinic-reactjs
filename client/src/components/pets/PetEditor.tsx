@@ -20,6 +20,11 @@ interface IPetEditorState {
   error?: IError;
 };
 
+const PET_TYPES = [
+  { name: 'Dog', value: 'DOG' },
+  { name: 'Cat', value: 'CAT' }
+];
+
 export default class PetEditor extends React.Component<IPetEditorProps, IPetEditorState> {
 
   context: IRouterContext;
@@ -48,8 +53,8 @@ export default class PetEditor extends React.Component<IPetEditorProps, IPetEdit
       typeId: editablePet.typeId
     };
 
-    const url = editablePet.isNew ? '/api/owners/' + owner.id + '/pets' :  '/api/owners/' + owner.id + '/pets/' + editablePet.id;
-    submitForm(editablePet.isNew ? 'POST' : 'PUT', url, request, (status, response) => {
+    const url = editablePet.id ? '/api-owners/owners/' + owner.id + '/pets' :  '/api-owners/owners/' + owner.id + '/pets/' + editablePet.id;
+    submitForm(editablePet.id ? 'POST' : 'PUT', url, request, (status, response) => {
       if (status === 204) {
         this.context.router.push({
           pathname: '/owners/' + owner.id
@@ -72,12 +77,12 @@ export default class PetEditor extends React.Component<IPetEditorProps, IPetEdit
     const { owner, pettypes } = this.props;
     const { editablePet, error } = this.state;
 
-    const formLabel = editablePet.isNew ? 'Add Pet' : 'Update Pet';
+    const formLabel = editablePet.id ? 'Add Pet' : 'Update Pet';
 
     return (
       <span>
         <h2>{formLabel}</h2>
-        <form className='form-horizontal' method='POST' action={'/api/owner'}>
+        <form className='form-horizontal' method='POST' action={'/api-owners/owners/'}>
           <div className='form-group has-feedback'>
             <div className='form-group'>
               <label className='col-sm-2 control-label'>Owner</label>
@@ -86,7 +91,7 @@ export default class PetEditor extends React.Component<IPetEditorProps, IPetEdit
 
             <Input object={editablePet} error={error} label='Name' name='name' onChange={this.onInputChange} />
             <DateInput object={editablePet} error={error} label='Birth date' name='birthDate' onChange={this.onInputChange} />
-            <SelectInput object={editablePet} error={error} label='Type' name='typeId' options={pettypes} onChange={this.onInputChange} />
+            <SelectInput object={editablePet} error={error} label='Type' name='typeId' options={PET_TYPES} onChange={this.onInputChange} />
           </div>
           <div className='form-group'>
             <div className='col-sm-offset-2 col-sm-10'>

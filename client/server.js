@@ -222,6 +222,10 @@ function runDevServer(port, protocol) {
       "/api-vets": {
         target: "http://localhost:8082", 
         pathRewrite: {"^/api-vets" : "petclinic-vets/"}
+      },
+      "/api-owners": {
+        target: "http://localhost:8081", 
+        pathRewrite: {"^/api-owners" : "petclinic-customers/"}
       }
     },
     // WebpackDevServer is noisy by default so we emit custom message instead

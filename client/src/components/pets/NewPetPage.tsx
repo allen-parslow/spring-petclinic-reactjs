@@ -5,8 +5,6 @@ import { IOwner, IEditablePet, ISelectOption } from '../../types';
 import LoadingPanel from './LoadingPanel';
 import PetEditor from './PetEditor';
 
-import createPetEditorModel from './createPetEditorModel';
-
 interface INewPetPageProps {
   params: { ownerId: string };
 }
@@ -19,7 +17,6 @@ interface INewPetPageState {
 
 const NEW_PET: IEditablePet = {
   id: null,
-  isNew: true,
   name: '',
   birthDate: null,
   typeId: null
@@ -28,8 +25,9 @@ const NEW_PET: IEditablePet = {
 export default class NewPetPage extends React.Component<INewPetPageProps, INewPetPageState> {
 
   componentDidMount() {
-    createPetEditorModel(this.props.params.ownerId, Promise.resolve(NEW_PET))
-      .then(model => this.setState(model));
+    fetch('/api-owners/owners/' + this.props.params.ownerId)
+    .then(response => response.json())
+    .then(model => { this.setState({ owner: model }); });
   }
 
   render() {
